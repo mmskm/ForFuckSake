@@ -4,12 +4,14 @@ age = []
 salli = []
 while 1 :
 
-    print('1 - Add a new employe \n 2 - delete employe \n 3 - searh employe \n 4 - exit  ')
-    something = int(input('  :  '))
+    print('--------------------------------------------------------')
+    print('| 1 - Add a new employe \n| 2 - delete employe \n| 3 - searh employe \n| 4 - exit  ')
+    print('--------------------------------------------------------')
+    something = int(input())
 
     if something == 1 :
 
-        name.append(input('The name of empo : '))
+        name.append(input('The name of employe : '))
         jobtile.append(input('The title : '))
         age.append(input('The age : '))
         salli.append(input('The salli : '))
@@ -38,4 +40,5 @@ while 1 :
     if something == 4 :
         
         break
+
 
