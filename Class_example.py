@@ -11,9 +11,11 @@ class TwoNumbers() :
     def Divide(self) :
         print(self.number_1, ' / ',self.number_2, ' = ',self.number_1/self.number_2)   
 
+
+
 Two_numbers = TwoNumbers(10,5)
 
-Two_numbers.Multiply
-Two_numbers.Minus
-Two_numbers.Plus
-Two_numbers.Divide
+Two_numbers.Multiply()
+Two_numbers.Minus()
+Two_numbers.Plus()
+Two_numbers.Divide()
