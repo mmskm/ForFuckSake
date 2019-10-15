@@ -12,6 +12,7 @@ class employe() :
         print('The title of employe : ',self.title)
         print('The salary of employe : ',self.salary)
     
+    
 
 
 A = []
