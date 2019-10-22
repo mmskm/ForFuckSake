@@ -56,6 +56,10 @@ class champion ():
         self.level = 1
         self.__init__(self.champ)
         self.level_up(level-1)
+    def receive_damage(self,dmg):
+        dmg = dmg * (1 - (self.AR/(100+self.AR)))
+        self.HP = self.HP - dmg
+
 def search_champ(name):
     for a in champ_list :
         if name in a :
@@ -63,22 +67,32 @@ def search_champ(name):
             break
 def define_champ(name):
     return champion(champ_list[search_champ(name)])
+def battle_to_death(champ1,champ2):
+    time1 = (champ2.HP/champ1.AD)/champ1.AS
+    time2 = (champ1.HP/champ2.AD)/champ2.AS
+    if int(time1) < int(time2):
+        print(champ1.name,'is the winner')
+        return True
+    else :
+        print(champ2.name,'is the winner')
+        return False
+
+
 
 champ_class = []
 for champ in champ_list :
     champ_class.append(champion(champ))
 
-best_champ = champion()
-for index in range(5) :
-    cDps = 0
-    for champs in champ_class :
-        champs.set_level(1)
-        dps = champs.AD/champs.AS
-        if dps > cDps :
-            best_champ = champs
-            cDps = dps
-    else :
-        print(cDps)
-        best_champ.print_stats()
-        champ_class.pop(champ_class.index(best_champ))
 
+Garen = define_champ('Swain')
+Garen.set_level(18)
+wins = 0
+losses = 0
+for index in range(champ_class.__len__()):
+    champ_class[index].set_level(18)
+    if battle_to_death(Garen,champ_class[index]):
+        wins +=1
+    else:
+        losses +=1
+print('\n',Garen.name,':','Wins:',wins)
+print(Garen.name,':','losses:',losses)
