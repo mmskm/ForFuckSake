@@ -68,8 +68,10 @@ def search_champ(name):
 def define_champ(name):
     return champion(champ_list[search_champ(name)])
 def battle_to_death(champ1,champ2):
-    time1 = (champ2.HP/champ1.AD)/champ1.AS
-    time2 = (champ1.HP/champ2.AD)/champ2.AS
+    dmg1 = champ1.AD * (1 - (champ2.AR/(100+champ2.AR)))
+    dmg2 = champ2.AD * (1 - (champ1.AR/(100+champ1.AR)))
+    time1 = (champ2.HP/dmg1)/champ1.AS
+    time2 = (champ1.HP/dmg2)/champ2.AS
     if int(time1) < int(time2):
         print(champ1.name,'is the winner')
         return True
@@ -84,12 +86,12 @@ for champ in champ_list :
     champ_class.append(champion(champ))
 
 
-Garen = define_champ('Swain')
-Garen.set_level(18)
+Garen = define_champ('Udyr')
+Garen.set_level(7)
 wins = 0
 losses = 0
 for index in range(champ_class.__len__()):
-    champ_class[index].set_level(18)
+    champ_class[index].set_level(7)
     if battle_to_death(Garen,champ_class[index]):
         wins +=1
     else:
