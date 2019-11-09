@@ -1,3 +1,5 @@
+from Project_L.skill import monster
+
 x = open("Project_L/Champ_stats.txt")
 champ_list = []
 for line in x :
@@ -9,6 +11,7 @@ for line in x :
 
 class champion ():
     level = 1
+    current_exp = 0
     def __init__(self,stats = [0]*19) :
         self.champ = stats.copy()
         self.name = stats[0]
@@ -59,6 +62,13 @@ class champion ():
     def receive_damage(self,dmg):
         dmg = dmg * (1 - (self.AR/(100+self.AR)))
         self.HP = self.HP - dmg
+    def exp_gain(self,exp):
+        next_level_exp = ((self.level+1)*100)+80
+        self.current_exp += exp
+        if self.current_exp >= next_level_exp :
+            self.level_up()
+            self.current_exp -= next_level_exp
+        
 
 def search_champ(name):
     for a in champ_list :
@@ -83,16 +93,9 @@ champ_class = []
 for champ in champ_list :
     champ_class.append(champion(champ))
 
+blue = monster(2100,10,82,0.493,15,115+50)
 
-Garen = define_champ('Swain')
-Garen.set_level(18)
-wins = 0
-losses = 0
-for index in range(champ_class.__len__()):
-    champ_class[index].set_level(18)
-    if battle_to_death(Garen,champ_class[index]):
-        wins +=1
-    else:
-        losses +=1
-print('\n',Garen.name,':','Wins:',wins)
-print(Garen.name,':','losses:',losses)
+t = 0.00
+while True :
+    t += 0.001
+    blue.receive_damege()
